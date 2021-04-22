@@ -38,6 +38,7 @@ export function generateService(
   const serverUrl = fillServerVariables(server);
   const name = getName(api);
   const parsedUrl = parseUrl(serverUrl);
+  const rootRouteDefaults = api['x-kong-route-defaults'] || {};
 
   // Service plugins
   const globalPlugins = generateGlobalPlugins(api);
@@ -80,14 +81,19 @@ export function generateService(
         continue;
       }
 
+      // $FlowFixMe what follows are inference errors that flow experiences but TypeScript will not
+      const pathRouteDefaults: XKongRouteDefaults = api['x-kong-route-defaults'] || {};
       // Create the base route object
       const fullPathRegex = pathVariablesToRegex(routePath);
+      // $FlowFixMe
       const route: DCRoute = {
+        ...rootRouteDefaults,
         tags,
         name: generateRouteName(api, routePath, method),
         methods: [method.toUpperCase()],
         paths: [fullPathRegex],
-        strip_path: false,
+        // $FlowFixMe
+        strip_path: pathRouteDefaults.strip_path || pathItem.strip_path || false,
       };
 
       // Generate generic and security-related plugin objects
