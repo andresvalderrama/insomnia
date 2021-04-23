@@ -8,6 +8,10 @@ declare type XKongServiceDefaults = {
   'x-kong-service-defaults'?: DCService,
 };
 
+declare type XKongUpstreamDefaults = {
+  'x-kong-upstream-defaults'?: DCUpstream,
+};
+
 declare type OA3Info = {|
   title: string,
   version: string,
@@ -218,7 +222,8 @@ declare type OpenApi3Spec = {
   tags?: Array<string>,
   externalDocs?: OA3ExternalDocs,
 } & XKongName &
-  XKongServiceDefaults;
+  XKongServiceDefaults &
+  XKongUpstreamDefaults;
 
 const HttpMethod = {
   get: 'GET',

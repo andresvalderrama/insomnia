@@ -9,7 +9,10 @@ export function generateUpstreams(api: OpenApi3Spec, tags: Array<string>) {
     return [];
   }
 
+  const upstreamDefaults: XKongUpstreamDefaults = api['x-kong-upstream-defaults'] || {};
+
   const upstream: DCUpstream = {
+    ...upstreamDefaults,
     name: getName(api),
     targets: [],
     tags,
