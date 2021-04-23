@@ -4,6 +4,10 @@ declare type XKongName = {
   'x-kong-name'?: string,
 };
 
+declare type XKongServiceDefaults = {
+  'x-kong-service-defaults'?: DCService,
+};
+
 declare type OA3Info = {|
   title: string,
   version: string,
@@ -213,7 +217,8 @@ declare type OpenApi3Spec = {
   security?: Array<OA3SecurityRequirement>,
   tags?: Array<string>,
   externalDocs?: OA3ExternalDocs,
-} & XKongName;
+} & XKongName &
+  XKongServiceDefaults;
 
 const HttpMethod = {
   get: 'GET',

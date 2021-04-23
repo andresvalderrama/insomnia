@@ -42,7 +42,10 @@ export function generateService(
   // Service plugins
   const globalPlugins = generateGlobalPlugins(api);
 
+  const serviceDefaults: XKongServiceDefaults = api['x-kong-service-defaults'] || {};
+
   const service: DCService = {
+    ...serviceDefaults,
     name,
     // remove semicolon ie. convert https: to https
     protocol: parsedUrl.protocol.substring(0, parsedUrl.protocol.length - 1),
