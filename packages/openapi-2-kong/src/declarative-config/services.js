@@ -42,8 +42,10 @@ export function generateService(
   // Service plugins
   const globalPlugins = generateGlobalPlugins(api);
 
+  // $FlowFixMe
   const serviceDefaults: XKongServiceDefaults = api['x-kong-service-defaults'] || {};
 
+  // $FlowFixMe
   const service: DCService = {
     ...serviceDefaults,
     name,

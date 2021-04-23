@@ -9,8 +9,10 @@ export function generateUpstreams(api: OpenApi3Spec, tags: Array<string>) {
     return [];
   }
 
+  // $FlowFixMe
   const upstreamDefaults: XKongUpstreamDefaults = api['x-kong-upstream-defaults'] || {};
 
+  // $FlowFixMe
   const upstream: DCUpstream = {
     ...upstreamDefaults,
     name: getName(api),
